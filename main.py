@@ -50,17 +50,20 @@ def carrega_arquivo(tipo_arquivo, arquivo):
 def carrega_modelo(provedor, modelo, api_key, tipo_arquivo, arquivo):      
     documento = carrega_arquivo(tipo_arquivo, arquivo)
 
-    system_message = '''Você é um assistente amigável chamado Oráculo. Você possui acesso às seguintes informações vindas de um documento {}:
+    system_message = '''Você é um assistente amigável chamado Oráculo. Você possui acesso às seguintes informações vindas de 
+    um documento {}:
 
     ####
     {}
     ####
 
-    Utilize as informações fornecidas para basear as suas respostas e dados apenas referente ao documento. Perguntas não relacionadas ao documento informe que não pode passar a informação.
+    Utilize as informações fornecidas para basear as suas respostas e dados apenas referente ao documento.
+    Perguntas não relacionadas ao documento informe que não pode passar a informação.
 
     Sempre que houver $ na sua saída, substitua por S.
 
-    Se a informação do documento for algo como "Just a moment... Enable Javascript and cookies to continue" sugira ao usuário carregar novamente o Oráculo!
+    Se a informação do documento for algo como "Just a moment... Enable Javascript and cookies to continue" sugira ao usuário
+    carregar novamente o Oráculo!
     '''.format(tipo_arquivo, documento)
 
     template = ChatPromptTemplate.from_messages([
