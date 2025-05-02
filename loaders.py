@@ -1,4 +1,4 @@
-from langchain.document_loaders import WebBaseLoader, YoutubeLoader, CSVLoader, PyPDFLoader, TextLoader
+from langchain_community.document_loaders import WebBaseLoader, YoutubeLoader, CSVLoader, PyPDFLoader, TextLoader
 from fake_useragent import UserAgent
 import os
 import time

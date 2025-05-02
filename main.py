@@ -49,12 +49,13 @@ def carrega_arquivo(tipo_arquivo, arquivo):
 
 def carrega_modelo(provedor, modelo, api_key, tipo_arquivo, arquivo):      
     documento = carrega_arquivo(tipo_arquivo, arquivo)
+    documento = documento.replace('{', '{{').replace('}', '}}')
 
-    system_message = '''Você é um assistente amigável chamado Oráculo. Você possui acesso às seguintes informações vindas de 
-    um documento {}:
+    system_message = f'''Você é um assistente amigável chamado Oráculo. Você possui acesso às seguintes informações vindas de 
+    um documento {tipo_arquivo}:
 
     ####
-    {}
+    {documento}
     ####
 
     Utilize as informações fornecidas para basear as suas respostas e dados apenas referente ao documento.
@@ -64,7 +65,7 @@ def carrega_modelo(provedor, modelo, api_key, tipo_arquivo, arquivo):
 
     Se a informação do documento for algo como "Just a moment... Enable Javascript and cookies to continue" sugira ao usuário
     carregar novamente o Oráculo!
-    '''.format(tipo_arquivo, documento)
+    '''
 
     template = ChatPromptTemplate.from_messages([
         ('system', system_message),
