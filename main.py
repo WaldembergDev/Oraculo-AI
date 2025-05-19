@@ -51,8 +51,7 @@ def carrega_modelo(provedor, modelo, api_key, tipo_arquivo, arquivo):
     documento = carrega_arquivo(tipo_arquivo, arquivo)
     documento = documento.replace('{', '{{').replace('}', '}}')
 
-    system_message = f'''Você é um assistente amigável chamado Oráculo. Você possui acesso às seguintes informações vindas de 
-    um documento {tipo_arquivo}:
+    system_message = f'''Você é um assistente amigável chamado Oráculo. Você possui acesso às seguintes informações vindas um documento {tipo_arquivo}:
 
     ####
     {documento}
@@ -65,6 +64,8 @@ def carrega_modelo(provedor, modelo, api_key, tipo_arquivo, arquivo):
 
     Se a informação do documento for algo como "Just a moment... Enable Javascript and cookies to continue" sugira ao usuário
     carregar novamente o Oráculo!
+
+    Se a pergunta do usuário não tiver no documento, peça para que o usuário abra um ticket no QualityWeb
     '''
 
     template = ChatPromptTemplate.from_messages([
@@ -79,7 +80,7 @@ def carrega_modelo(provedor, modelo, api_key, tipo_arquivo, arquivo):
 
 
 def pagina_chat():
-    st.header('Bem vindo ao oráculo!', divider=True)
+    st.header('Bem vindo ao QUALIT.IA!', divider=True)
     chain = st.session_state.get('chain')
     if chain is None:
         st.error('Carregue o Oráculo')
